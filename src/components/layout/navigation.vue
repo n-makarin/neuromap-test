@@ -35,8 +35,6 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
-  padding: 7px;
-  border-bottom: 1px solid rgb(196, 196, 196);
   &__item {
     display: inline-block;
     text-decoration: none;
