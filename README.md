@@ -1,4 +1,6 @@
-# neuromap-test
+# Neuromap-test
+
+[📋 Task description](https://github.com/ivryb/test/blob/master/meetings-light.md)
 
 ## Project setup
 ```
