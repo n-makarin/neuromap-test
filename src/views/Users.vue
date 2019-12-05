@@ -1,11 +1,19 @@
 <template>
   <div class="users">
     <button @click="modal.create.visible = true">create user</button>
-    <list :data="list" title="user list" />
+    <list
+      :data="list"
+      title="user list"
+      @showDetail="modal.detail.visible = true"
+    />
     <portal to="root">
       <create
         :visible="modal.create.visible"
         @close="modal.create.visible = false"
+      />
+      <detail
+        :visible="modal.detail.visible"
+        @close="modal.detail.visible = false"
       />
     </portal>
   </div>
@@ -15,11 +23,13 @@
 import { mapActions, mapGetters } from "vuex";
 import List from "@/components/views/users/list";
 import Create from "@/components/views/users/modal/create";
+import Detail from "@/components/views/users/modal/detail";
 
 export default {
   components: {
     List,
-    Create
+    Create,
+    Detail
   },
   computed: {
     ...mapGetters({
@@ -30,6 +40,9 @@ export default {
     return {
       modal: {
         create: {
+          visible: false
+        },
+        detail: {
           visible: false
         }
       }
