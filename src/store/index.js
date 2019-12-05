@@ -5,6 +5,7 @@ import user from "@/store/user.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  namespaced: true,
   state: {},
   mutations: {},
   actions: {},
