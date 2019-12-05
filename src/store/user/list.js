@@ -1,4 +1,5 @@
 export default {
+  namespaced: true,
   state: {
     data: []
   },
@@ -8,9 +9,23 @@ export default {
     }
   },
   actions: {
-    // async get({ commit }) {
-    //   await this.app.$sendReq
-    // }
+    async get({ commit }) {
+      await this._vm
+        .$sendRequest({
+          method: "GET",
+          url: "user/list"
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .then(response => {
+          if (!response || !response.data || response.data.length === 0) {
+            return;
+          }
+          const userList = response.data;
+          commit("SET", userList);
+        });
+    }
   },
   modules: {}
 };
