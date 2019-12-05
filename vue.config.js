@@ -4,7 +4,7 @@ module.exports = {
       // Add styles
       sass: {
         prependData: `@import "~@/assets/styles/index.scss";`
-      },
+      }
     }
   }
 }
