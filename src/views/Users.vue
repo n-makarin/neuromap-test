@@ -1,21 +1,39 @@
 <template>
   <div class="users">
+    <button @click="modal.create.visible = true">create user</button>
     <list :data="list" title="user list" />
+    <portal to="root">
+      <create
+        :visible="modal.create.visible"
+        @close="modal.create.visible = false"
+      />
+    </portal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import List from "@/components/views/users/list";
+import Create from "@/components/views/users/modal/create";
 
 export default {
   components: {
-    List
+    List,
+    Create
   },
   computed: {
     ...mapGetters({
       list: "user/list/data"
     })
+  },
+  data() {
+    return {
+      modal: {
+        create: {
+          visible: false
+        }
+      }
+    };
   },
   methods: {
     ...mapActions({
