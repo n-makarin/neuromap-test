@@ -27,5 +27,8 @@ export default {
         });
     }
   },
+  getters: {
+    data: state => state.data
+  },
   modules: {}
 };
