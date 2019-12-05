@@ -5,7 +5,7 @@
       v-for="user in data"
       :key="user.id"
       class="list__item list-item"
-      @click="showDetail(user.id)"
+      @click="showDetail(user.name, user.surname)"
     >
       <div class="list-item__name">{{ user.name }}</div>
       <div class="list-item__surname">{{ user.surname }}</div>
@@ -31,8 +31,9 @@ export default {
      * @param {number} userId
      * @returns void
      */
-    showDetail(userId) {
-      console.log(userId);
+    showDetail(name, surname) {
+      this.$store.dispatch("user/set", { name, surname });
+      this.$emit("showDetail");
     }
   }
 };
