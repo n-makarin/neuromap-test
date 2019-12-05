@@ -1,4 +1,5 @@
-const endpoint = "http://127.0.0.1:8000";
+import axios from "axios";
+const endpoint = "http://127.0.0.1:8000/";
 
 export default {
   install(Vue) {
@@ -10,7 +11,7 @@ export default {
       ...options
     }) => {
       const headers = "";
-      return Vue.$axios({
+      return axios({
         method,
         url: endpoint + url,
         params,
