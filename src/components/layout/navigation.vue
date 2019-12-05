@@ -1,8 +1,12 @@
 <template>
   <div class="navigation">
-    <router-link v-for="link in linkList" :key="link.title" :to="link.path">{{
-      link.title
-    }}</router-link>
+    <router-link
+      v-for="link in linkList"
+      :key="link.title"
+      :to="link.path"
+      class="navigation__item"
+      >{{ link.title }}</router-link
+    >
   </div>
 </template>
 
@@ -12,16 +16,16 @@ export default {
     return {
       linkList: [
         {
+          title: "home",
+          path: "/"
+        },
+        {
           title: "users",
           path: "users"
         },
         {
           title: "events",
           path: "events"
-        },
-        {
-          title: "home",
-          path: "/"
         }
       ]
     };
@@ -29,4 +33,30 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.navigation {
+  padding: 7px;
+  border-bottom: 1px solid rgb(196, 196, 196);
+  &__item {
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 15px;
+    color: $gray;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+    &:hover {
+      color: $green-dark;
+    }
+    &.router-link-exact-active {
+      color: $gray-light;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+</style>
