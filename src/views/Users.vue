@@ -1,14 +1,17 @@
 <template>
   <div class="users">
-    <h1>users</h1>
+    <list :data="list" title="user list" />
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import List from "@/components/views/users/list";
 
 export default {
-  name: "home",
+  components: {
+    List
+  },
   computed: {
     ...mapGetters({
       list: "user/list/data"
