@@ -2,6 +2,7 @@
   <div id="app">
     <Header />
     <router-view />
+    <portal-target name="root" />
   </div>
 </template>
 
