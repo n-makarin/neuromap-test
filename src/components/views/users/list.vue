@@ -41,6 +41,9 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   &__item {
   }
   &__title {
@@ -49,7 +52,19 @@ export default {
     }
   }
   &-item {
-    display: flex;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &__name {
+      margin-right: 4px;
+    }
+    &__name,
+    &__surname {
+      display: inline-block;
+    }
   }
 }
 </style>
