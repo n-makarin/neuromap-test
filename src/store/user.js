@@ -75,6 +75,28 @@ export default {
           commit("SET", { id: 0, name: "", surname: "" });
           dispatch("user/list/remove", userId, { root: true });
         });
+    },
+    /**
+     * Get user by id
+     * @param {number} userId
+     * @returns object User data
+     */
+    async get(context, userId) {
+      const user = await this._vm
+        .$sendRequest({
+          method: "GET",
+          url: `user/detail/${userId}`
+        })
+        .catch(err => {
+          console.log(err, context);
+        })
+        .then(response => {
+          if (!response || !response.data || response.data.length === 0) {
+            return;
+          }
+          return response.data;
+        });
+      return user;
     }
   },
   getters: {
