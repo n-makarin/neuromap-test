@@ -6,8 +6,12 @@
         :data="participantList"
         class="detail__participant-list"
       />
-      <div class="detail__facilitator">{{ fullName.facilitatorUser }}</div>
-      <div class="detail__secretary">{{ fullName.secretaryUser }}</div>
+      <div class="detail__facilitator">
+        Facilitator: {{ fullName.facilitatorUser }}
+      </div>
+      <div class="detail__secretary">
+        Secretary: {{ fullName.secretaryUser }}
+      </div>
       <button @click="close">close</button>
       <button @click="remove">remove</button>
     </div>
