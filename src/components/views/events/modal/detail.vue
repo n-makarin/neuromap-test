@@ -2,7 +2,10 @@
   <modal-default :visible="visible" @close="$emit('close')" size="sm">
     <div class="detail">
       <div class="detail__title">{{ event.title }}</div>
-      <div class="detail__participant-list">{{ participantList }}</div>
+      <participant-list
+        :data="participantList"
+        class="detail__participant-list"
+      />
       <div class="detail__facilitator">{{ facilitatorUser }}</div>
       <div class="detail__secretary">{{ secretaryUser }}</div>
       <button @click="close">close</button>
@@ -14,10 +17,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ModalDefault from "@/components/layout/modal/default";
+import ParticipantList from "@/components/views/events/modal/detail/participant-list";
 
 export default {
   components: {
-    ModalDefault
+    ModalDefault,
+    ParticipantList
   },
   props: {
     visible: {
