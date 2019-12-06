@@ -1,5 +1,5 @@
 <template>
-  <modal-default :visible="visible" @close="$emit('close')">
+  <modal-default :visible="visible" @close="$emit('close')" size="sm">
     <div class="detail">
       <div class="detail__name">{{ user.name }}</div>
       <div class="detail__surname">{{ user.surname }}</div>

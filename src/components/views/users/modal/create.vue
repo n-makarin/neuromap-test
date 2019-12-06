@@ -1,5 +1,5 @@
 <template>
-  <modal-default :visible="visible" @close="$emit('close')">
+  <modal-default :visible="visible" @close="$emit('close')" size="md">
     <div class="create">
       <form @submit.prevent="create">
         <div
