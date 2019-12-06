@@ -34,6 +34,10 @@ export default {
     close() {
       this.$emit("close");
     },
+    /**
+     * Remove user from store and db by id
+     * @returns Promise<void>
+     */
     async remove() {
       await this.$store.dispatch("user/remove", this.user.id);
       if (this.user.id !== 0) {
