@@ -3,7 +3,8 @@
     <div class="detail">
       <div class="detail__name">{{ user.name }}</div>
       <div class="detail__surname">{{ user.surname }}</div>
-      <button @click="$emit('close')">close</button>
+      <button @click="close">close</button>
+      <button @click="remove">remove</button>
     </div>
   </modal-default>
 </template>
@@ -30,7 +31,16 @@ export default {
     }
   },
   methods: {
-    close() {}
+    close() {
+      this.$emit("close");
+    },
+    async remove() {
+      await this.$store.dispatch("user/remove", this.user.id);
+      if (this.user.id !== 0) {
+        return;
+      }
+      this.close();
+    }
   }
 };
 </script>
