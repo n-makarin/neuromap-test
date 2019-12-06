@@ -5,7 +5,7 @@
       v-for="user in data"
       :key="user.id"
       class="list__item list-item"
-      @click="showDetail(user.name, user.surname)"
+      @click="showDetail(user)"
     >
       <div class="list-item__name">{{ user.name }}</div>
       <div class="list-item__surname">{{ user.surname }}</div>
@@ -28,11 +28,11 @@ export default {
   methods: {
     /**
      * Show modal with detailed user info
-     * @param {number} userId
+     * @param {object} user
      * @returns void
      */
-    showDetail(name, surname) {
-      this.$store.dispatch("user/set", { name, surname });
+    showDetail(user) {
+      this.$store.dispatch("user/set", user);
       this.$emit("showDetail");
     }
   }
