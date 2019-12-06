@@ -29,7 +29,6 @@ export default {
   },
   computed: {
     event() {
-      debugger;
       return this.$store.getters["event/data"];
     }
   },
