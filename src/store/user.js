@@ -18,6 +18,8 @@ export default {
   },
   actions: {
     /**
+     * Set current user to store
+     * @prop {object} user
      * @returns void
      */
     set({ commit }, user) {
@@ -25,6 +27,30 @@ export default {
         return;
       }
       commit("SET", user);
+    },
+    /**
+     *
+     * @param {object} payload
+     * @returns Promise<void>
+     */
+    async create({ commit, dispatch }, { name = "", surname = "" }) {
+      await this._vm
+        .$sendRequest({
+          method: "POST",
+          url: "user/list",
+          data: { name, surname }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .then(response => {
+          if (!response || !response.data || response.data.length === 0) {
+            return;
+          }
+          const user = response.data;
+          commit("SET", user);
+          dispatch("user/list/add", user, { root: true });
+        });
     }
   },
   getters: {
