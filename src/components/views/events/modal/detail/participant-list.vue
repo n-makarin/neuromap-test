@@ -1,5 +1,6 @@
 <template>
   <div class="participant-list">
+    <div>Participants:</div>
     <div v-for="user in data" :key="user.id" class="participant-list__item">
       {{ `${user.name} ${user.surname}` }}
     </div>
