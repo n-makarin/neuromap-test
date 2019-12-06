@@ -1,7 +1,7 @@
 <template>
   <portal to="root">
     <div class="modal-default" v-if="visible">
-      <div class="modal-default__content">
+      <div class="modal-default__content" :size="size">
         <slot />
       </div>
       <div class="modal-default__overlay" @click="close"></div>
@@ -15,6 +15,10 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: ""
     }
   },
   methods: {
@@ -31,16 +35,26 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: $z-index_modal;
   &__content {
+    position: absolute;
+    margin: 0 auto;
+    max-height: 100%;
     padding: 20px;
     border-radius: 3px;
     background: white;
     z-index: $z-index_modal-content;
+    overflow-y: auto;
+    &[size="sm"] {
+      @include modal-size_sm;
+    }
+    &[size="md"] {
+      @include modal-size_md;
+    }
   }
   &__overlay {
     position: absolute;
