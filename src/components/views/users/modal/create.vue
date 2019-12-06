@@ -46,8 +46,25 @@ export default {
     };
   },
   methods: {
-    create() {
+    /**
+     * Create user, add it to store
+     * @returns Promise<void>
+     */
+    async create() {
+      const payload = {
+        name: this.fieldList[0].value,
+        surname: this.fieldList[1].value
+      };
+      await this.$store.dispatch("user/create", payload);
+      this.clearFieldListValues();
       this.$emit("close");
+    },
+    /**
+     * @returns void
+     */
+    clearFieldListValues() {
+      this.fieldList[0].value = "";
+      this.fieldList[1].value = "";
     }
   }
 };
