@@ -1,11 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import user from "@/store/user.js";
 import sharedMutations from "vuex-shared-mutations";
+
+import user from "@/store/user.js";
+import event from "@/store/event.js";
 
 Vue.use(Vuex);
 
-const sharedMutationList = ["user/SET", "user/list/SET"];
+const sharedMutationList = [
+  "user/SET",
+  "user/list/SET",
+  "event/SET",
+  "event/list/SET"
+];
 
 export default new Vuex.Store({
   namespaced: true,
@@ -13,7 +20,8 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    user
+    user,
+    event
   },
   plugins: [sharedMutations({ predicate: sharedMutationList })]
 });
