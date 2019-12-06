@@ -35,6 +35,18 @@ export default {
       const list = getters.data;
       list.push(user);
       commit("SET", list);
+    },
+    /**
+     * Remove user from user list
+     * @param {number} userId
+     * @returns void
+     */
+    remove({ getters, commit }, userId) {
+      let list = getters.data;
+      list = list.filter(function(element) {
+        return element.id !== userId;
+      });
+      commit("SET", list);
     }
   },
   getters: {
