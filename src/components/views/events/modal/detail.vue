@@ -6,8 +6,8 @@
         :data="participantList"
         class="detail__participant-list"
       />
-      <div class="detail__facilitator">{{ facilitatorUser }}</div>
-      <div class="detail__secretary">{{ secretaryUser }}</div>
+      <div class="detail__facilitator">{{ fullName.facilitatorUser }}</div>
+      <div class="detail__secretary">{{ fullName.secretaryUser }}</div>
       <button @click="close">close</button>
       <button @click="remove">remove</button>
     </div>
@@ -31,7 +31,12 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      fullName: {
+        facilitatorUser: "",
+        secretaryUser: ""
+      }
+    };
   },
   computed: {
     ...mapGetters({
@@ -60,6 +65,14 @@ export default {
         return;
       }
       this.close();
+    },
+    /**
+     * Set facilitator and secretary full names
+     * @returns void
+     */
+    setFullNames() {
+      this.fullName.facilitatorUser = `${this.facilitatorUser.name} ${this.facilitatorUser.surname}`;
+      this.fullName.secretaryUser = `${this.secretaryUser.name} ${this.secretaryUser.surname}`;
     }
   },
   watch: {
@@ -73,6 +86,7 @@ export default {
       await this.setParticipantList(this.event.participant_list);
       await this.setFacilitatorUser(this.event.facilitator_user_id);
       await this.setSecretaryUser(this.event.secretary_user_id);
+      this.setFullNames();
     }
   }
 };
