@@ -1,21 +1,28 @@
 <template>
-  <div class="create" v-if="visible">
-    <form @submit.prevent="create">
-      <div
-        class="create__item create-item"
-        v-for="item in fieldList"
-        :key="item.id"
-      >
-        <label :for="item.id">{{ item.label }}</label>
-        <input :id="item.id" type="text" v-model="item.value" />
-      </div>
-      <button>create user</button>
-    </form>
-  </div>
+  <modal-default :visible="visible" @close="$emit('close')">
+    <div class="create">
+      <form @submit.prevent="create">
+        <div
+          class="create__item create-item"
+          v-for="item in fieldList"
+          :key="item.id"
+        >
+          <label :for="item.id">{{ item.label }}</label>
+          <input :id="item.id" type="text" v-model="item.value" />
+        </div>
+        <button>create user</button>
+      </form>
+    </div>
+  </modal-default>
 </template>
 
 <script>
+import ModalDefault from "@/components/layout/modal/default";
+
 export default {
+  components: {
+    ModalDefault
+  },
   props: {
     visible: {
       type: Boolean,

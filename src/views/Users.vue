@@ -6,16 +6,14 @@
       title="user list"
       @showDetail="modal.detail.visible = true"
     />
-    <portal to="root">
-      <create
-        :visible="modal.create.visible"
-        @close="modal.create.visible = false"
-      />
-      <detail
-        :visible="modal.detail.visible"
-        @close="modal.detail.visible = false"
-      />
-    </portal>
+    <create
+      :visible="modal.create.visible"
+      @close="modal.create.visible = false"
+    />
+    <detail
+      :visible="modal.detail.visible"
+      @close="modal.detail.visible = false"
+    />
   </div>
 </template>
 
