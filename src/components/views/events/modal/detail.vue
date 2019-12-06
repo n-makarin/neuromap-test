@@ -3,8 +3,8 @@
     <div class="detail">
       <div class="detail__title">{{ event.title }}</div>
       <div class="detail__participant-list">{{ participantList }}</div>
-      <div class="detail__facilitator">{{ event.facilitator_user_id }}</div>
-      <div class="detail__secretary">{{ event.secretary_user_id }}</div>
+      <div class="detail__facilitator">{{ facilitatorUser }}</div>
+      <div class="detail__secretary">{{ secretaryUser }}</div>
       <button @click="close">close</button>
       <button @click="remove">remove</button>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import ModalDefault from "@/components/layout/modal/default";
 
 export default {
@@ -28,20 +29,22 @@ export default {
     return {};
   },
   computed: {
-    event() {
-      return this.$store.getters["event/data"];
-    },
-    participantList() {
-      return this.$store.getters["event/participantList"];
-    }
+    ...mapGetters({
+      event: "event/data",
+      participantList: "event/participantList",
+      facilitatorUser: "event/facilitatorUser",
+      secretaryUser: "event/secretaryUser"
+    })
   },
   methods: {
     close() {
       this.$emit("close");
     },
-    async setParticipantList(participantList) {
-      await this.$store.dispatch("event/setParticipantList", participantList);
-    },
+    ...mapActions({
+      setParticipantList: "event/setParticipantList",
+      setFacilitatorUser: "event/setFacilitatorUser",
+      setSecretaryUser: "event/setSecretaryUser"
+    }),
     /**
      * Remove event from store and db by id
      * @returns Promise<void>
@@ -62,9 +65,9 @@ export default {
       if (!newValue) {
         return;
       }
-      if (this.participantList.length === 0) {
-        await this.setParticipantList(this.event.participant_list);
-      }
+      await this.setParticipantList(this.event.participant_list);
+      await this.setFacilitatorUser(this.event.facilitator_user_id);
+      await this.setSecretaryUser(this.event.secretary_user_id);
     }
   }
 };
