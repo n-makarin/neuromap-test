@@ -1,5 +1,5 @@
 <template>
-  <modal-default :visible="visible" @close="$emit('close')" size="sm">
+  <modal-default :visible="visible" @close="$emit('close')" size="md">
     <div class="detail">
       <div class="detail__title">{{ event.title }}</div>
       <participant-list
@@ -96,4 +96,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.detail {
+  &__title {
+    font-size: 18px;
+    font-weight: bolder;
+  }
+}
+</style>
