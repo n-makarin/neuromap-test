@@ -25,4 +25,32 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal-default {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-index_modal;
+  &__content {
+    padding: 20px;
+    border-radius: 3px;
+    background: white;
+    z-index: $z-index_modal-content;
+  }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: $z-index_overlay;
+    background: $gray-transparent;
+    cursor: pointer;
+  }
+}
+</style>
