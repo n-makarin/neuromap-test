@@ -25,6 +25,16 @@ export default {
           const userList = response.data;
           commit("SET", userList);
         });
+    },
+    /**
+     * Add user to user list
+     * @param {object} user User data
+     * @returns void
+     */
+    add({ getters, commit }, user) {
+      const list = getters.data;
+      list.push(user);
+      commit("SET", list);
     }
   },
   getters: {
