@@ -2,44 +2,51 @@
   <modal-default :visible="visible" @close="$emit('close')" size="md">
     <div class="create">
       <form @submit.prevent="create">
-        <label :for="title.id">{{ title.label }}</label>
-        <input :id="title.id" type="text" v-model="title.value" />
+        <div class="create__form-item">
+          <label :for="title.id">{{ title.label }}</label>
+          <input
+            class="create__form-item__field"
+            :id="title.id"
+            type="text"
+            v-model="title.value"
+          />
+        </div>
 
-        <label :for="participantList.id">{{ participantList.label }}</label>
-        <multiselect
-          :id="participantList.id"
-          v-model="participantListValue"
-          :options="participantList.options"
-          :searchable="false"
-          placeholder="Pick a value"
-        />
+        <div class="create__form-item" :id="participantList.id">
+          <label :for="participantList.id">{{ participantList.label }}</label>
+          <multiselect
+            class="create__form-item__field"
+            v-model="participantListValue"
+            :options="participantList.options"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :searchable="false"
+            placeholder="Pick a value"
+          />
+        </div>
 
-        <label :for="facilitatorUser.id">{{ facilitatorUser.label }}</label>
-        <multiselect
-          :id="facilitatorUser.id"
-          v-model="facilitatorUserValue"
-          :options="facilitatorUser.options"
-          :searchable="false"
-          placeholder="Pick a value"
-        />
+        <div class="create__form-item">
+          <label :for="facilitatorUser.id">{{ facilitatorUser.label }}</label>
+          <multiselect
+            :id="facilitatorUser.id"
+            v-model="facilitatorUserValue"
+            :options="facilitatorUser.options"
+            :searchable="false"
+            placeholder="Pick a value"
+          />
+        </div>
 
-        <label :for="secretaryUser.id">{{ secretaryUser.label }}</label>
-        <multiselect
-          :id="secretaryUser.id"
-          v-model="secretaryUserValue"
-          :options="secretaryUser.options"
-          :searchable="false"
-          placeholder="Pick a value"
-        />
-
-        <label :for="secretaryUser.id">{{ secretaryUser.label }}</label>
-        <multiselect
-          :id="secretaryUser.id"
-          v-model="secretaryUserValue"
-          :options="secretaryUser.options"
-          :searchable="false"
-          placeholder="Pick a value"
-        />
+        <div class="create__form-item">
+          <label :for="secretaryUser.id">{{ secretaryUser.label }}</label>
+          <multiselect
+            :id="secretaryUser.id"
+            v-model="secretaryUserValue"
+            :options="secretaryUser.options"
+            :searchable="false"
+            placeholder="Pick a value"
+          />
+        </div>
 
         <button>create event</button>
       </form>
@@ -84,7 +91,7 @@ export default {
         id: "facilitator_user_id",
         type: "select",
         options: ["one", "two", "three"],
-        label: "participant user"
+        label: "facilitator user"
       };
     },
     secretaryUser() {
@@ -146,4 +153,38 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.create {
+  &__form-item {
+    margin-bottom: 20px;
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+    &__field {
+      display: block;
+    }
+
+    .multiselect,
+    input {
+      @include multiselect;
+    }
+  }
+  #participant_list {
+    .multiselect {
+      &__tag {
+        display: block;
+        margin-bottom: 5px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &__tags-wrap {
+      }
+    }
+  }
+}
+</style>
