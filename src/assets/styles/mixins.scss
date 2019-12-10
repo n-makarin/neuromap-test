@@ -22,4 +22,7 @@
       margin-bottom: 0;
     }
   }
+  &__option--selected {
+    opacity: .2;
+  }
 }
