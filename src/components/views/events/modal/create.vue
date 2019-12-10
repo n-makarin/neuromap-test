@@ -1,7 +1,6 @@
 <template>
   <modal-default :visible="visible" @close="$emit('close')" size="md">
     <div class="create">
-      {{ rawUserList }}
       <form @submit.prevent="create">
         <div class="create__form-item">
           <label :for="title.id">{{ title.label }}</label>
@@ -23,7 +22,12 @@
             :close-on-select="false"
             :clear-on-select="false"
             :searchable="false"
-            placeholder="Pick a value"
+            placeholder="Pick users"
+            :custom-label="customLabel"
+            :preserve-search="true"
+            label="user"
+            track-by="id"
+            :preselect-first="true"
           />
         </div>
 
@@ -32,9 +36,10 @@
           <multiselect
             :id="facilitatorUser.id"
             v-model="facilitatorUserValue"
-            :options="facilitatorUser.options"
+            :options="notBisyPartisipantList"
             :searchable="false"
-            placeholder="Pick a value"
+            placeholder="Pick user"
+            :custom-label="customLabel"
           />
         </div>
 
@@ -43,9 +48,10 @@
           <multiselect
             :id="secretaryUser.id"
             v-model="secretaryUserValue"
-            :options="secretaryUser.options"
+            :options="notBisyPartisipantList"
             :searchable="false"
-            placeholder="Pick a value"
+            placeholder="Pick user"
+            :custom-label="customLabel"
           />
         </div>
 
@@ -75,6 +81,19 @@ export default {
     ...mapGetters({
       rawUserList: "user/list/data"
     }),
+    notBisyPartisipantList() {
+      const rawList = this.rawUserList;
+      const result = [];
+      rawList.forEach(element => {
+        if (
+          element.id !== this.facilitatorUserValue.id &&
+          element.id !== this.secretaryUserValue.id
+        ) {
+          result.push(element);
+        }
+      });
+      return result;
+    },
     title() {
       return {
         id: "title",
@@ -87,7 +106,7 @@ export default {
         id: "participant_list",
         name: "participantList",
         type: "multiselect",
-        options: ["one", "two", "three"],
+        options: this.rawUserList,
         label: "participant list"
       };
     },
@@ -96,7 +115,7 @@ export default {
         id: "facilitator_user_id",
         type: "select",
         options: ["one", "two", "three"],
-        label: "facilitator user"
+        label: "facilitator"
       };
     },
     secretaryUser() {
@@ -104,7 +123,7 @@ export default {
         id: "secretary_user_id",
         type: "select",
         options: ["one", "two", "three"],
-        label: "secretary user"
+        label: "secretary"
       };
     },
     start() {
@@ -125,7 +144,7 @@ export default {
   data() {
     return {
       titleValue: "",
-      participantListValue: "",
+      participantListValue: [],
       facilitatorUserValue: "",
       secretaryUserValue: "",
       startValue: "",
@@ -138,32 +157,56 @@ export default {
      * Create event, add it to store
      * @returns Promise<void>
      */
-    async create() {
-      // const payload = {
-      //   name: this.fieldList[0].value,
-      //   surname: this.fieldList[1].value
-      // };
-      // await this.$store.dispatch("event/create", payload);
-      // this.clearFieldListValues();
-      // this.$emit("close");
-    },
+    async create() {},
     /**
      * @returns void
      */
-    clearFieldListValues() {
-      this.fieldList[0].value = "";
-      this.fieldList[1].value = "";
-    },
+    clearFieldListValues() {},
     ...mapActions({
       getUserRawList: "user/list/get"
-    })
+    }),
+    customLabel(option) {
+      return `${option.name}  ${option.surname}`;
+    }
   },
   watch: {
     async visible(newValue) {
-      if (!newValue || this.rawUserList.length === 0) {
+      if (!newValue || this.rawUserList.length !== 0) {
         return;
       }
       await this.getUserRawList();
+    },
+    facilitatorUserValue(newValue) {
+      let filteredUserList = this.participantListValue.filter(element => {
+        return this.facilitatorUserValue.id === element.id;
+      });
+      this.participantListValue = filteredUserList;
+      this.participantListValue.push(newValue);
+    },
+    secretaryUserValue(newValue) {
+      let filteredUserList = this.participantListValue.filter(element => {
+        return this.facilitatorUserValue.id === element.id;
+      });
+      this.participantListValue = filteredUserList;
+      this.participantListValue.push(newValue);
+    },
+    participantListValue(newValue) {
+      let hasFacilitator = false;
+      let hasSecretary = false;
+      newValue.forEach(element => {
+        if (element.id === this.facilitatorUserValue.id) {
+          hasFacilitator = true;
+        }
+        if (element.id === this.secretaryUserValue.id) {
+          hasSecretary = true;
+        }
+      });
+      if (!hasFacilitator) {
+        this.facilitatorUserValue = "";
+      }
+      if (!hasSecretary) {
+        this.secretaryUserValue = "";
+      }
     }
   }
 };
