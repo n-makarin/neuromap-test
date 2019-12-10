@@ -1,1 +1,25 @@
-@import "mixins/modal.scss"
+@import "mixins/modal.scss";
+
+@mixin multiselect {
+  border: 1px solid $gray-light;
+  border-radius: 3px;
+  padding: 5px 7px;
+
+  &__content {
+    margin: 5px 0;
+    padding-left: 10px;
+    list-style: none;
+  }
+  &__element {
+    border-bottom: 1px solid $gray-light;
+    padding: 3px 7px;
+    background: #ededed;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
