@@ -1,6 +1,7 @@
 <template>
   <modal-default :visible="visible" @close="$emit('close')" size="md">
     <div class="create">
+      {{ rawUserList }}
       <form @submit.prevent="create">
         <div class="create__form-item">
           <label :for="title.id">{{ title.label }}</label>
@@ -57,6 +58,7 @@
 <script>
 import ModalDefault from "@/components/layout/modal/default";
 import Multiselect from "vue-multiselect";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -70,6 +72,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      rawUserList: "user/list/data"
+    }),
     title() {
       return {
         id: "title",
@@ -148,6 +153,17 @@ export default {
     clearFieldListValues() {
       this.fieldList[0].value = "";
       this.fieldList[1].value = "";
+    },
+    ...mapActions({
+      getUserRawList: "user/list/get"
+    })
+  },
+  watch: {
+    async visible(newValue) {
+      if (!newValue || this.rawUserList.length === 0) {
+        return;
+      }
+      await this.getUserRawList();
     }
   }
 };
