@@ -8,7 +8,7 @@
             class="create__form-item__field"
             :id="title.id"
             type="text"
-            v-model="title.value"
+            v-model="titleValue"
           />
         </div>
 
@@ -178,6 +178,37 @@ export default {
     ...mapActions({
       getUserRawList: "user/list/get"
     }),
+    async create() {
+      if (this.isValidPayload()) {
+        return;
+      }
+      const participantList = [];
+      this.participantListValue.forEach(element => {
+        participantList.push(element.id);
+      });
+      const payload = {
+        title: this.titleValue,
+        participant_list: participantList,
+        facilitator_user_id: this.facilitatorUserValue.id,
+        secretary_user_id: this.secretaryUserValue.id,
+        duration: {
+          start: this.startValue,
+          end: this.endValue
+        },
+        status: this.status
+      };
+      await this.$store.dispatch("event/create", payload);
+      this.$emit("close");
+    },
+    isValidPayload() {
+      return (
+        !this.titleValue ||
+        !this.facilitatorUserValue ||
+        !this.secretaryUserValue ||
+        !this.startValue ||
+        !this.endValue
+      );
+    },
     /**
      * Set custo label to multiselect
      * @param {object} option
