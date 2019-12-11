@@ -144,7 +144,7 @@ export default {
   data() {
     return {
       titleValue: "",
-      participantListValue: "",
+      participantListValue: [],
       facilitatorUserValue: "",
       secretaryUserValue: "",
       startValue: "",
@@ -156,16 +156,89 @@ export default {
     ...mapActions({
       getUserRawList: "user/list/get"
     }),
+    /**
+     * Set custo label to multiselect
+     * @param {object} option
+     * @returns string
+     */
     customLabel(option) {
       return `${option.name}  ${option.surname}`;
+    },
+    /**
+     * Update participant list on change facilitator or secretary users
+     * @param {object} newValue
+     * @param {object} oldValue
+     * @returns void
+     */
+    updateParticipantList(newValue, oldValue) {
+      let hasChoosenUser = false;
+      const prevUser = oldValue;
+      let filteredUserList = this.participantListValue.filter(element => {
+        if (element.id === newValue.id) {
+          hasChoosenUser = true;
+        }
+        // remove prev user from participantList
+        return prevUser.id !== element.id;
+      });
+      // set filtered participantList
+      this.participantListValue = filteredUserList;
+      // add new user to participantList
+      if (hasChoosenUser) {
+        return;
+      }
+      this.participantListValue.push(newValue);
     }
   },
   watch: {
+    /**
+     * Get userRawList on modal opening
+     * @param {boolean} newValue
+     * @returns void
+     */
     async visible(newValue) {
       if (!newValue || this.rawUserList.length !== 0) {
         return;
       }
       await this.getUserRawList();
+    },
+    /**
+     * Update participantListValue on prop changing
+     */
+    facilitatorUserValue(newValue, oldValue) {
+      if (newValue === "") {
+        return;
+      }
+      this.updateParticipantList(newValue, oldValue);
+    },
+    /**
+     * Update participantListValue on prop changing
+     */
+    secretaryUserValue(newValue, oldValue) {
+      if (newValue === "") {
+        return;
+      }
+      this.updateParticipantList(newValue, oldValue);
+    },
+    /**
+     * Update secretaryUserValue & facilitatorUserValue on prop changing
+     */
+    participantListValue(newValue) {
+      let hasFacilitator = false;
+      let hasSecretary = false;
+      newValue.forEach(element => {
+        if (element.id === this.facilitatorUserValue.id) {
+          hasFacilitator = true;
+        }
+        if (element.id === this.secretaryUserValue.id) {
+          hasSecretary = true;
+        }
+      });
+      if (!hasFacilitator) {
+        this.facilitatorUserValue = "";
+      }
+      if (!hasSecretary) {
+        this.secretaryUserValue = "";
+      }
     }
   }
 };
