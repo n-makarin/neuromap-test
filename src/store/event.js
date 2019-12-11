@@ -66,6 +66,28 @@ export default {
         });
     },
     /**
+     * Remove event from store and db
+     * @param {number} userId
+     * @returns Promise<void>
+     */
+    async remove({ commit, dispatch }, eventId) {
+      await this._vm
+        .$sendRequest({
+          method: "DELETE",
+          url: `event/detail/${eventId}`
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .then(response => {
+          if (!response.status === 200) {
+            return;
+          }
+          commit("SET", { id: 0, name: "", surname: "" });
+          dispatch("event/list/remove", eventId, { root: true });
+        });
+    },
+    /**
      * Get users by ids and set participantList to store
      * @param {number[]} participantList List of participants users ids
      * @returns Promise<void>
