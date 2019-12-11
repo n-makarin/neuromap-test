@@ -61,3 +61,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.users {
+  button {
+    margin: 15px 0;
+  }
+}
+</style>
