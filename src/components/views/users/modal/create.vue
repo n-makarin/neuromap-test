@@ -70,4 +70,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.create {
+  input {
+    @include multiselect;
+  }
+  &__item {
+    margin-bottom: 10px;
+    label {
+      display: block;
+      margin-bottom: 3px;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+  button {
+    margin-top: 15px;
+  }
+}
+</style>
