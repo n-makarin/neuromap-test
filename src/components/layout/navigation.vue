@@ -16,10 +16,6 @@ export default {
     return {
       linkList: [
         {
-          title: "home",
-          path: "/"
-        },
-        {
           title: "users",
           path: "users"
         },
