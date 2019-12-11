@@ -18,5 +18,6 @@ export default {
 
 <style lang="scss">
 #app {
+  padding: 0 20%;
 }
 </style>

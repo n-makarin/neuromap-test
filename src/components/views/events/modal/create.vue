@@ -65,7 +65,7 @@
           <date-picker v-model="endValue" :config="end.options" />
         </div>
 
-        <button>create event</button>
+        <button class="button-create">create event</button>
         <span v-if="error.visible" class="create__error">
           {{ error.message }}
         </span>

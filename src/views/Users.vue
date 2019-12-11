@@ -1,6 +1,8 @@
 <template>
   <div class="users">
-    <button @click="modal.create.visible = true">create user</button>
+    <button class="button-create" @click="modal.create.visible = true">
+      create user
+    </button>
     <list
       :data="list"
       title="user list"

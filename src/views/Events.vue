@@ -1,6 +1,8 @@
 <template>
   <div class="events">
-    <button @click="modal.create.visible = true">create event</button>
+    <button class="button-create" @click="modal.create.visible = true">
+      create event
+    </button>
     <list
       :data="list"
       title="event list"
@@ -59,3 +61,5 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped></style>

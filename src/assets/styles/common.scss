@@ -1,3 +1,13 @@
 body {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
+
+.button-default {
+  @include button-default;
+}
+.button-create {
+  @include button-create;
+}
+.button-remove {
+  @include button-remove;
+}

@@ -10,7 +10,7 @@
           <label :for="item.id">{{ item.label }}</label>
           <input :id="item.id" type="text" v-model="item.value" />
         </div>
-        <button>create user</button>
+        <button class="button-create">create user</button>
       </form>
     </div>
   </modal-default>

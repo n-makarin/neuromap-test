@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
+  text-align: center;
   &__item {
     display: inline-block;
     text-decoration: none;

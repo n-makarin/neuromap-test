@@ -41,3 +41,21 @@
     color: red;
   }
 }
+
+@mixin button-default {
+  border: none;
+  border-radius: 3px;
+  padding: 4px 7px;
+  background: rgb(155, 155, 155);
+  color: white;
+}
+@mixin button-create {
+  @include button-default;
+  background: #41b883;
+  color: white;
+}
+@mixin button-remove {
+  @include button-default;
+  background: #ff6666;
+  color: white;
+}

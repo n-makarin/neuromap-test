@@ -3,8 +3,8 @@
     <div class="detail">
       <div class="detail__name">{{ user.name }}</div>
       <div class="detail__surname">{{ user.surname }}</div>
-      <button @click="close">close</button>
-      <button @click="remove">remove</button>
+      <button class="button-default" @click="close">close</button>
+      <button class="button-remove" @click="remove">remove</button>
     </div>
   </modal-default>
 </template>
