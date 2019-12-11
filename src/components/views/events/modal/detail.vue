@@ -12,6 +12,13 @@
       <div class="detail__secretary">
         Secretary: {{ fullName.secretaryUser }}
       </div>
+      <div class="detail__duration">
+        <div class="detail__start">{{ event.duration.start }}</div>
+        <div class="detail__end">{{ event.duration.end }}</div>
+      </div>
+      <div class="detail__status">
+        {{ event.status }}
+      </div>
       <button class="button-default" @click="close">close</button>
       <button class="button-remove" @click="remove">remove</button>
     </div>
@@ -99,8 +106,24 @@ export default {
 <style lang="scss" scoped>
 .detail {
   &__title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bolder;
+    margin-bottom: 10px;
+  }
+  &__facilitator {
+    margin-bottom: 10px;
+  }
+  &__secretary {
+    margin-bottom: 15px;
+  }
+  &__duration {
+    margin-bottom: 10px;
+  }
+  &__status {
+    margin-bottom: 15px;
+  }
+  .button-default {
+    margin-right: 10px;
   }
 }
 </style>
