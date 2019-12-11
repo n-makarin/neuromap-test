@@ -36,6 +36,11 @@
       margin-bottom: 0;
     }
   }
+  &__option {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
   &__option--selected {
     opacity: .6;
     color: red;
