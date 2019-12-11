@@ -1,8 +1,12 @@
 <template>
   <div class="participant-list">
-    <div>Participants:</div>
-    <div v-for="user in data" :key="user.id" class="participant-list__item">
-      {{ `${user.name} ${user.surname}` }}
+    <div class="participant-list__title">Participants:</div>
+    <div
+      v-for="(user, index) in data"
+      :key="user.id"
+      class="participant-list__item"
+    >
+      {{ `${index + 1}. ${user.name} ${user.surname}` }}
     </div>
   </div>
 </template>
@@ -18,4 +22,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.participant-list {
+  margin-bottom: 15px;
+  &__title {
+  }
+  &__item {
+    padding-left: 10px;
+  }
+}
+</style>
