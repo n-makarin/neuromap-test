@@ -55,6 +55,16 @@
           />
         </div>
 
+        <div class="create__form-item">
+          <label :for="start.id">{{ start.label }}</label>
+          <date-picker v-model="startValue" :config="start.options" />
+        </div>
+
+        <div class="create__form-item">
+          <label :for="end.id">{{ end.label }}</label>
+          <date-picker v-model="endValue" :config="end.options" />
+        </div>
+
         <button>create event</button>
       </form>
     </div>
@@ -62,14 +72,18 @@
 </template>
 
 <script>
+import "bootstrap/dist/css/bootstrap.css";
+import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import ModalDefault from "@/components/layout/modal/default";
 import Multiselect from "vue-multiselect";
+import DatePicker from "vue-bootstrap-datetimepicker";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     ModalDefault,
-    Multiselect
+    Multiselect,
+    DatePicker
   },
   props: {
     visible: {
@@ -114,7 +128,6 @@ export default {
       return {
         id: "facilitator_user_id",
         type: "select",
-        options: ["one", "two", "three"],
         label: "facilitator"
       };
     },
@@ -122,7 +135,6 @@ export default {
       return {
         id: "secretary_user_id",
         type: "select",
-        options: ["one", "two", "three"],
         label: "secretary"
       };
     },
@@ -130,14 +142,24 @@ export default {
       return {
         id: "start",
         type: "datetimepicker",
-        label: "start"
+        label: "start",
+        options: {
+          format: "DD/MM/YYYY",
+          useCurrent: false,
+          minDate: new Date()
+        }
       };
     },
     end() {
       return {
         id: "end",
         type: "datetimepicker",
-        label: "end"
+        label: "end",
+        options: {
+          format: "DD/MM/YYYY",
+          useCurrent: false,
+          minDate: this.startValue || new Date()
+        }
       };
     }
   },
