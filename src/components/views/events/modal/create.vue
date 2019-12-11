@@ -147,7 +147,7 @@ export default {
         type: "datetimepicker",
         label: "start",
         options: {
-          format: "DD/MM/YYYY",
+          format: "DD.MM.YYYY",
           useCurrent: false,
           minDate: new Date()
         }
@@ -159,7 +159,7 @@ export default {
         type: "datetimepicker",
         label: "end",
         options: {
-          format: "DD/MM/YYYY",
+          format: "DD.MM.YYYY",
           useCurrent: false,
           minDate: this.startValue || new Date()
         }
