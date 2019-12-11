@@ -25,9 +25,9 @@
             placeholder="Pick users"
             :custom-label="customLabel"
             :preserve-search="true"
+            :preselect-first="false"
             label="user"
             track-by="id"
-            :preselect-first="true"
           />
         </div>
 
@@ -144,7 +144,7 @@ export default {
   data() {
     return {
       titleValue: "",
-      participantListValue: [],
+      participantListValue: "",
       facilitatorUserValue: "",
       secretaryUserValue: "",
       startValue: "",
@@ -153,15 +153,6 @@ export default {
     };
   },
   methods: {
-    /**
-     * Create event, add it to store
-     * @returns Promise<void>
-     */
-    async create() {},
-    /**
-     * @returns void
-     */
-    clearFieldListValues() {},
     ...mapActions({
       getUserRawList: "user/list/get"
     }),
@@ -175,38 +166,6 @@ export default {
         return;
       }
       await this.getUserRawList();
-    },
-    facilitatorUserValue(newValue) {
-      let filteredUserList = this.participantListValue.filter(element => {
-        return this.facilitatorUserValue.id === element.id;
-      });
-      this.participantListValue = filteredUserList;
-      this.participantListValue.push(newValue);
-    },
-    secretaryUserValue(newValue) {
-      let filteredUserList = this.participantListValue.filter(element => {
-        return this.facilitatorUserValue.id === element.id;
-      });
-      this.participantListValue = filteredUserList;
-      this.participantListValue.push(newValue);
-    },
-    participantListValue(newValue) {
-      let hasFacilitator = false;
-      let hasSecretary = false;
-      newValue.forEach(element => {
-        if (element.id === this.facilitatorUserValue.id) {
-          hasFacilitator = true;
-        }
-        if (element.id === this.secretaryUserValue.id) {
-          hasSecretary = true;
-        }
-      });
-      if (!hasFacilitator) {
-        this.facilitatorUserValue = "";
-      }
-      if (!hasSecretary) {
-        this.secretaryUserValue = "";
-      }
     }
   }
 };
