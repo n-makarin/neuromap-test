@@ -42,6 +42,30 @@ export default {
       commit("SET", event);
     },
     /**
+     * Create event, add to store and db
+     * @param {object} payload
+     * @returns Promise<void>
+     */
+    async create({ commit, dispatch }, payload) {
+      await this._vm
+        .$sendRequest({
+          method: "POST",
+          url: "event/list",
+          data: payload
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .then(response => {
+          if (!response || !response.data || response.data.length === 0) {
+            return;
+          }
+          const event = response.data;
+          commit("SET", event);
+          dispatch("event/list/add", event, { root: true });
+        });
+    },
+    /**
      * Get users by ids and set participantList to store
      * @param {number[]} participantList List of participants users ids
      * @returns Promise<void>
