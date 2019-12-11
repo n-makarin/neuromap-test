@@ -325,6 +325,9 @@ export default {
     input {
       @include multiselect;
     }
+    input {
+      width: 100%;
+    }
   }
   #participant_list {
     .multiselect {
@@ -338,6 +341,7 @@ export default {
     }
   }
   &__error {
+    margin-left: 5px;
     color: rgb(187, 29, 29);
     font-size: 14px;
   }
