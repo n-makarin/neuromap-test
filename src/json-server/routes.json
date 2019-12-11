@@ -4,6 +4,6 @@
     "/user/detail/:id": "/user/:id",
 
     "/event/list": "/event",
-    "/event/detail/:id": "/events/:id"
+    "/event/detail/:id": "/event/:id"
   }
 }
