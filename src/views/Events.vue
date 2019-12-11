@@ -62,4 +62,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.events {
+  button {
+    margin: 15px 0;
+  }
+}
+</style>
