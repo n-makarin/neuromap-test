@@ -47,6 +47,7 @@ export default {
   &__item {
   }
   &__title {
+    font-size: 22px;
     &::first-letter {
       text-transform: uppercase;
     }
