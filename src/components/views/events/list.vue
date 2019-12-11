@@ -40,11 +40,21 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+  &__title {
+    font-size: 22px;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   &-item {
     cursor: pointer;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 </style>
