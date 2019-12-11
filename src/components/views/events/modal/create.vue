@@ -66,6 +66,9 @@
         </div>
 
         <button>create event</button>
+        <span v-if="error.visible" class="create__error">
+          {{ error.message }}
+        </span>
       </form>
     </div>
   </modal-default>
@@ -171,7 +174,11 @@ export default {
       secretaryUserValue: "",
       startValue: "",
       endValue: "",
-      status: "scheduled"
+      status: "scheduled",
+      error: {
+        visible: false,
+        message: "Enter the correct data"
+      }
     };
   },
   methods: {
@@ -180,8 +187,10 @@ export default {
     }),
     async create() {
       if (this.isValidPayload()) {
+        this.error.visible = true;
         return;
       }
+      this.error.visible = false;
       const participantList = [];
       this.participantListValue.forEach(element => {
         participantList.push(element.id);
@@ -326,9 +335,11 @@ export default {
           margin-bottom: 0;
         }
       }
-      &__tags-wrap {
-      }
     }
+  }
+  &__error {
+    color: rgb(187, 29, 29);
+    font-size: 14px;
   }
 }
 </style>
