@@ -1,6 +1,7 @@
 @import "mixins/modal.scss";
 
 @mixin multiselect {
+  position: relative;
   border: 1px solid $gray-light;
   border-radius: 3px;
   padding: 5px 7px;
@@ -9,6 +10,16 @@
     margin: 5px 0;
     padding-left: 10px;
     list-style: none;
+    &-wrapper {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      background: white;
+      border: 1px solid $gray-light;
+      border-radius: 0 0 3px 3px;
+      z-index: 2;
+    }
   }
   &__element {
     border-bottom: 1px solid $gray-light;
@@ -23,6 +34,7 @@
     }
   }
   &__option--selected {
-    opacity: .2;
+    opacity: .6;
+    color: red;
   }
 }
