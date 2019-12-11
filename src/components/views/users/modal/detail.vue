@@ -1,8 +1,7 @@
 <template>
   <modal-default :visible="visible" @close="$emit('close')" size="sm">
     <div class="detail">
-      <div class="detail__name">{{ user.name }}</div>
-      <div class="detail__surname">{{ user.surname }}</div>
+      <div class="detail__full-name">{{ fullName }}</div>
       <button class="button-default" @click="close">close</button>
       <button class="button-remove" @click="remove">remove</button>
     </div>
@@ -28,6 +27,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters["user/data"];
+    },
+    fullName() {
+      return `${this.user.name} ${this.user.surname}`;
     }
   },
   methods: {
@@ -49,4 +51,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.detail {
+  .button-default {
+    margin-right: 10px;
+  }
+  &__full-name {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+}
+</style>
