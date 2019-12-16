@@ -1,8 +1,11 @@
 module.exports = {
   chainWebpack: config => {
-    config.module.rule('eslint').use('eslint-loader').options({
-      fix: true
-    })
+    config.module
+      .rule("eslint")
+      .use("eslint-loader")
+      .options({
+        fix: true
+      });
   },
   css: {
     loaderOptions: {
@@ -12,4 +15,4 @@ module.exports = {
       }
     }
   }
-}
+};
